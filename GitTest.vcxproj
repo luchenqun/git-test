@@ -76,10 +76,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BranchTwo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="master.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BranchTwo.h" />
     <ClInclude Include="master.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
