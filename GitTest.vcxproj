@@ -76,11 +76,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BranchOne.cpp" />    <ClCompile Include="BranchTwo.cpp" />    <ClCompile Include="main.cpp" />
+    <ClCompile Include="BranchOne.cpp" />
+    <ClCompile Include="BranchThree.cpp" />
+    <ClCompile Include="BranchTwo.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="master.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BranchOne.h" />    <ClInclude Include="BranchTwo.h" />    <ClInclude Include="master.h" />
+    <ClInclude Include="BranchOne.h" />
+    <ClInclude Include="BranchThree.h" />
+    <ClInclude Include="BranchTwo.h" />
+    <ClInclude Include="master.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
