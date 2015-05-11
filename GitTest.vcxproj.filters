@@ -23,16 +23,26 @@
     </ClCompile>
     <ClCompile Include="BranchOne.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>    <ClCompile Include="BranchTwo.cpp">
+    </ClCompile>
+    <ClCompile Include="BranchTwo.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>  </ItemGroup>
+    </ClCompile>
+    <ClCompile Include="BranchThree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="master.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="BranchOne.h">
       <Filter>头文件</Filter>
-    </ClInclude>    <ClInclude Include="BranchTwo.h">
+    </ClInclude>
+    <ClInclude Include="BranchTwo.h">
       <Filter>头文件</Filter>
-    </ClInclude>  </ItemGroup>
+    </ClInclude>
+    <ClInclude Include="BranchThree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
