@@ -10,4 +10,5 @@ BranchOne::BranchOne()
 
 BranchOne::~BranchOne()
 {
+	cout << "BranchOne destruction" << endl;
 }
