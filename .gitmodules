@@ -1,6 +1,1 @@
-[submodule "StaticEmit"]
-	path = StaticEmit
-	url = https://github.com/luchenqun/StaticEmit.git
-[submodule "module/UnitTest"]
-	path = module/UnitTest
-	url = https://github.com/luchenqun/UnitTest.git
+
