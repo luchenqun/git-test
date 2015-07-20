@@ -1,6 +1,3 @@
-[submodule "binDoubanFM"]
-	path = binDoubanFM
-	url = https://github.com/luchenqun/binDoubanFM.git
 [submodule "StaticEmit"]
 	path = StaticEmit
 	url = https://github.com/luchenqun/StaticEmit.git
