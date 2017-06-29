@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>git - the simple guide - no deep shit!</title>
+		<link href='http://fonts.googleapis.com/css?family=Chelsea+Market' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="css/normalize.min.css" type="text/css">
+		<link rel="stylesheet" href="css/style.css" type="text/css">
+	</head>
+	<body>
+		<div class="scrollblock block-title">
+			<h1>git - 简明操作指南</h1>
+			<p style="text-align:center;">●'◡'● 帮助从未使用过Git的同学入门，木有高深内容 ●'◡'●</p>
+			<p style="text-align:center;">为什么要用Git：1、别人都在用。2、能正确使用全球最大的男性交友社区Github。<br/>3、掌握这指南里面的Git内容，可以在简历里面多写句"熟练使用Git"。</p>
+			<p style="text-align:center;">
+				新建了一个&nbsp;&nbsp;<a href="http://192.168.9.66/luchenqun/git-test" target="_blank">git-test</a>&nbsp;&nbsp;项目，供大家测试使用。
+			</p>
+			<div style="text-align:center;"><img src="img/arrow.png" alt=""/>
+			</div>
+		</div>
+		<!-- setup -->
+		<a name="setup"></a>
+		<div class="scrollblock block-setup">
+			<h2>安装</h2>
+			<p>
+				<span>
+					Windows 安装：<a href="https://git-for-windows.github.io/">下载链接</a>
+				</span>下载完成之后，一路点next安装即可。
+			</p>
+			<p>
+				<span>
+					Mac 安装：<a href="https://git-scm.com/download/mac">下载链接</a>
+				</span>暂时无Mac测试，请自行百度安装。
+			</p>
+			<p>
+				<span>
+					Linux 安装：sudo apt install git
+				</span>
+				上面以Ubuntu 16.04为例。
+			</p>
+			<p>安装完成之后，在控制台界面下输入<code>git --version</code>。若显示git version 2.x.x，则表示安装成功！</p>
+			<p>确认安装成功，使用命令<code>git config --global user.email "youemail@juzix.io"</code>，邮箱建议使用公司邮箱。设置一下你的邮箱，使用命令<code>git config --global user.name "youname"</code>设置一下你的用户名，用户名建议使用全拼小写。</p>
+		</div>
+		<a name="key"></a>
+		<div class="scrollblock block-key">
+			<h2>生成密钥</h2>
+			<p>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、检查是否存在密钥：<code>cd ~/.ssh && ls
+				</code>
+				如果有 id_rsa，id_rsa.pub 两个文件存在，那么已生成密钥。直接进入第3步。
+			</p>
+			<p>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、生成密钥：如果用第一步的方法检测到你的系统没有密钥。执行
+				<code>ssh-keygen -t rsa -C "YouEamil@juzix.io"</code>，邮箱替换成自己的公司邮箱，然后一路按3个回车，密码为空。
+			</p>
+			<p>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、添加密钥到Gitlab：登入公司的<a href="http://192.168.9.66/" target="_blank">Gitlab网页</a>，在右上角点头像-->Settings-->SSH-Keys。将id_ras.pub里面的内容粘贴到Key输入框里面。Title随意填。
+			</p>
+			<p>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="./img/key.gif" target="_blank">点击查看动态操作</a>
+			</p </div>
+			<a name="create"></a>
+			<div class="scrollblock block-create">
+				<h2>创建新仓库</h2>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;创建新文件夹，打开，然后执行：<code>git init</code>以创建新的 git 仓库。<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当然，这样创建的新项目后期推送到远程端的时候，还需要add remote。为了省事，所以建议在Gitlab页面上相应的位置直接创建项目，然后clone下来。
+				</p>
+			</div>
+			<a name="checkout"></a>
+			<div class="scrollblock block-checkout">
+				<h2>克隆代码</h2>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;进入Gitlab上面你需要克隆的项目，复制该项目的SSH的url，执行类似如下命令：
+					<code>git clone git@192.168.9.66:luchenqun/git-test.git</code>
+				</p>
+			</div>
+			<a name="trees"></a>
+			<div class="scrollblock block-trees">
+				<h2>工作流</h2>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你的本地仓库由 git 维护的三棵"树"组成。第一个是你的<code>工作目录</code>，它持有实际文件；<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第二个是<code>暂存区（Index）</code>，它像个缓存区域，临时保存你的改动；<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最后是<code>HEAD</code>，它指向你最后一次提交的结果。<br/>
+				</p>
+				<div style="text-align:center;"><img src="img/trees.png" alt=""/></div>
+			</div>
+			<a name="add"></a>
+			<div class="scrollblock block-add">
+				<h2>添加和提交</h2>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你可以提交所有的更改到暂存区，使用如下命令：<code>git add -A</code><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用如下命令以实际提交改动：<code>git commit -m "你的一些修改说明"</code><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现在，你的改动已经提交到了<b>HEAD</b>，但是还没到你的远端仓库。<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当然，在执行<code>git add -A</code>之前，建议使用<code>git status</code>查看更改的文件，<code>git diff</code>可查看更改的内容。
+				</p>
+			</div>
+			<a name="push"></a>
+			<div class="scrollblock block-remote">
+				<h2>推送改动到服务器</h2>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你的改动现在已经在本地仓库的<b>HEAD</b>中了。<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;执行如下命令以将这些改动提交到远端仓库：<code>git push origin master</code><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以把<i>master</i>换成你想要推送的任何分支。<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不过，一般使用<code>git push</code>即可，它默认推送当前分支到服务器。<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当然，如果服务器上有比你本地更新的代码，那么推送就会失败，你必须先执行命令<code>git pull</code>合并服务器上代码才能进行推送。
+				</p>
+			</div>
+			<a name="update"></a>
+			<div class="scrollblock block-merging">
+				<h2>更新与合并</h2>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要更新你的本地仓库至最新改动，执行：<code>git pull</code><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以在你的工作目录中<i>获取（fetch）</i>并<i>合并（merge）</i>远端的改动。<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要合并其他分支到你的当前分支（例如 master），执行：<code>git merge &lt;branch&gt;</code><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这两种情况下，git 都会尝试去自动合并改动。但是，这可能并非每次都成功，并可能出现<i>冲突（conflicts）</i>。<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这时候就需要你手动修改这些文件来手动合并这些<i>冲突（conflicts）</i>。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;改完之后，你需要执行如下命令以将它们标记为合并成功：<code>git add &lt;filename&gt;</code><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在合并改动之前，你可以使用如下命令预览差异：<code>git diff &lt;source_branch&gt; &lt;target_branch&gt;</code><br/>
+				</p>
+			</div>
+			<a name="branching"></a>
+			<div class="scrollblock block-branching">
+				<h2>分支</h2>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分支是用来将特性开发绝缘开来的。在你创建仓库的时候，<i>master</i>
+					是"默认的"分支。在其他分支上进行开发，完成后再将它们合并到主分支上。假设我们以已存在的develop为开发分支为例。你现在想要开发一个新功能，想以develop分支为基础，创建一个叫做"feature_x"的分支。大概需要进行如下几步：
+				</p>
+				<div style="text-align:center;"><img src="img/branches.png" alt=""/></div>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、切换到develop分支：
+					<code>git checkout develop</code>当然，如果本身就在develop分支，就没必要执行该操作。<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、创建并切换到新分支：
+					<code>git checkout -b feature_x</code>这样，一个新的分支就创建了。<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过一段时间的开发，你开发的功能已经稳定觉得可以合并到develop分支了。则大概进行如下操作：<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、切换回develop开发分支：<code>git checkout develop</code><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、将分支feature_x的功能合并到develop分支：<code>git merge orgin/feature_x</code><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、再把新建的分支删掉：<code>git branch -d feature_x</code>当然，你不删也是没啥问题的。<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;需要说明的是，除非你将分支推送到远端仓库，不然该分支只存在于你的机器上面。<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你可以这样，将你的开发分支推送到服务器上：<code>git push origin feature_x;</code>
+				</p>
+			</div>
+			<a name="tagging"></a>
+			<div class="scrollblock block-tagging">
+				<h2>标签</h2>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;释放版本的时候你可以执行如下命令创建一个叫做
+					<i>v1.0.0</i>的标签：<code>git tag v1.0.0 1b2e1d63ff</code><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中<i>1b2e1d63ff</i>是你想要标记的提交 ID 的前 10 位字符。可以使用下列命令获取提交 ID：<code>git log</code><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当然，你也可以使用少一点的提交 ID 前几位，只要它的指向具有唯一性。
+				</p>
+			</div>
+			<a name="log"></a>
+			<div class="scrollblock block-log">
+				<h2>查看提交日志</h2>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果你想了解本地仓库的历史记录，最简单的命令就是使用:
+					<code>git log</code><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你可以添加一些参数来修改他的输出，从而得到自己想要的结果。
+					<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如只看某一个人lcq的提交记录:<code>git log --author=lcq</code><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这些只是你可以使用的参数中很小的一部分。更多的信息，参考：<code>git log --help</code><br/>
+				</p>
+			</div>
+			<a name="checkout-replace"></a>
+			<div class="scrollblock block-checkout-replace">
+				<h2>替换本地改动</h2>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;假如你操作失误或其他原因，你可以使用如下命令替换掉本地改动：
+					<code>git checkout &lt;filename&gt;</code>此命令会使用 HEAD 中的最新内容替换掉你的工作目录中的文件。已添加到暂存区的改动以及新文件都不会受到影响。
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于checkout的作用，我们还可以把他用到解决当合并发生冲突的时候。比如合并完成之后，文件filenameA与filenameB均发生了冲突。但是你确定fileNameA我需要用我自己的最新的，这时候你可以执行<code>git checkout --ours &lt;filenameA&gt;</code>，如果确定文件filenameB使用别人的，那么执行<code>git checkout --theirs &lt;filenameA&gt;</code>即可！
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;假如你想丢弃你在本地的master分支所有改动与提交，此种情况也是有可能的，比如你前天晚上在家里对master分支写了一些代码，但是没有提交到服务器。你第二天到公司继续做然后提交到服务器，晚上回家你只想用服务器上最新的代码即可。你可以使用如下两个命令获取服务器上最新的版本历史，并将你本地主分支指向它：
+					<code>git fetch</code>
+					<code>git reset --hard origin/master</code>
+				</p>
+			</div>
+			<a name="hints"></a>
+			<div class="scrollblock block-hints">
+				<h2>其他常用功能简介</h2>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、可以使用 .gitignore 文件配置不需要加入版本管理的文件，比如Visual Studio编译C++生成的*.obj文件。放心，不要你去写，有人专门写了一些这样的模板文件。详见链接<a href="https://github.com/github/gitignore" target="_blank">Gitignore</a>
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、Git去将来。我们可以使用<code>git log</code>查看我提交的日志。然后使用<code>git reset --hard &lt;commitId&gt;</code>回退到你之前代码提交的状态。这个时候，你想从当前的状态"穿越"到前面的状态去，这个时候你使用<code>git log</code>是无法查看到"未来"的commitId的。此时，你可以使用<code>git reflog</code>命令，它将你所有的操作都记录下来了。
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、Git暂存更改。假设有这种情况。我在我的feature_x分支上做我的开发，这个时候，我需要切换到develop分支查看某些代码。但是我在feature_x分支上有改动，因为你没有git commit存到HEAD区，这个时候切换分支会造成你的改动全部丢失，所以Git是不允许你这么做的，但是我又不想做git commit操作。你可以使用<code>git stash</code>将本地更改暂存起来，然后切换到develop分支，回到feature_x分支再使用<code>git stash pop</code>将暂存的文件弹出来即可。</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、找出"罪魁祸首"。当事情出错时，先去指责别人是人类的天性之一。如果你的产品出问题了，使用<code>git blame &lt;filename&gt;</code>命令可以很容易找出罪魁祸首。这个命令可以将文件中的每一行的作者、最新的变更提交和提交时间展示出来。此操作慎用！</p>
+			</div>
+			<a name="resources"></a>
+			<div class="scrollblock block-resources">
+				<h2>链接与资源</h2>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank">1、廖雪峰Git教程。</a>
+					这个教程有很多的小视频，推荐！
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://git.oschina.net/progit/" target="_blank">2、Pro Git（中文版）</a>有部分Git底层一些原理。
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://item.jd.com/11615420.html" target="_blank">3、Git版本控制管理（第2版）。</a>一本讲关于Git的书籍，想深入了解Git的可以考虑一下。
+				</p>
+				<p>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank">4、git - 简明指南。</a>上面的指南80%内容来自该指南，我只添加了一些觉得我工作常用的以及做了一些排版。
+				</p>
+			</div>
+		</body>
+	</html>
